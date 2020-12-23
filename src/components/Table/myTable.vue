@@ -13,7 +13,7 @@
         <el-button icon="el-icon-menu" @click="dialogVisible = true"></el-button>
       </el-tooltip>
       <el-select v-model="condition" placeholder="请选择筛选条件">
-        <el-option v-for="(item,index) in columns" :key="`option_${index}`" :label="item.label"
+        <el-option v-for="(item,index) in columnNames" :key="`option_${index}`" :label="item.label"
                    :value="item.prop"></el-option>
       </el-select>
       <el-input placeholder="请输入搜索内容" v-model="searchText" clearable>
@@ -37,7 +37,6 @@
 				<el-button type="primary" @click="filterData">确 定</el-button>
 			</span>
     </el-dialog>
-  </div>
   </div>
 </template>
 
@@ -150,7 +149,6 @@
             const oldItem = this.columnList[evt.oldIndex];
             this.columnList.splice(evt.oldIndex, 1);
             this.columnList.splice(evt.newIndex, 0, oldItem);
-            this.columnNames = []
             this.columnNames = this.columnList.map(item => item.label)
             localStorage.setItem('columnList', JSON.stringify(this.columnList))
           }
